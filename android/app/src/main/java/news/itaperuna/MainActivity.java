@@ -1,4 +1,4 @@
-package info.itaperuna.itaperuna;
+package news.itaperuna;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
