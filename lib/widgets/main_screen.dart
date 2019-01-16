@@ -32,7 +32,7 @@ class MainScreenState extends State<MainScreen> {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          title: Text("Info Itaperuna"),
+          title: Text("Itaperuna Notícias"),
         ),
         // bottomNavigationBar: BottomNavigationBar(
         //   currentIndex: _index,

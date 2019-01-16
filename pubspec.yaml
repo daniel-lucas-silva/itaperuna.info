@@ -18,16 +18,17 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
-  http:
-  redux:
-  flutter_redux:
-  redux_logging:
-  redux_thunk:
-  redux_persist_flutter:
-  redux_persist:
-  html2md:
-  flutter_markdown:
+  #cupertino_icons: ^0.1.2
+  http: ^0.12.0+1
+  timeago: ^2.0.10
+  redux: ^3.0.0
+  flutter_redux: ^0.5.3
+  redux_logging: ^0.3.0
+  redux_thunk: ^0.2.1
+  redux_persist_flutter: ^0.8.0
+  redux_persist: ^0.8.0
+  html2md: ^0.2.1
+  flutter_markdown: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -43,8 +44,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
+  assets:
+    - bg-ita.jpg
+    - no-image.png
   #  - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
