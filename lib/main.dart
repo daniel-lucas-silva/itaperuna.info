@@ -25,10 +25,11 @@ class MyApp extends StatelessWidget {
     return StoreProvider<RootState>(
       store: store,
       child: MaterialApp(
+
         title: 'Itaperuna Notícias',
         home: HomeScreen(),
         theme: ThemeData(
-          primaryColor: Color(0xff368B41),
+          primaryColor: Color(0xff286C3E),
           accentColor: Colors.cyan[600],
           fontFamily: 'Montserrat',
           primaryTextTheme: TextTheme(

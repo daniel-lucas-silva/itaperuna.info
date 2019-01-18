@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
@@ -28,13 +27,10 @@ class _GeneralTabState extends State<GeneralTab> {
   @override
   Widget build(BuildContext context) {
     return StoreBuilder(
-      // onInitialBuild: (store) {
-      //   store.dispatch(fetchHomePosts);
-      // },
-      onInit: (store) {
-        store.dispatch(fetchHomePosts(context));
-      },
-      rebuildOnChange: true,
+       onInit: (store) {
+         store.dispatch(fetchHomePosts(context));
+       },
+//      rebuildOnChange: true,
       builder: (context, Store<RootState> store) {
         var featuresPosts = store.state.app.features;
         var regionPosts = store.state.app.region;
@@ -102,7 +98,7 @@ class _GeneralTabState extends State<GeneralTab> {
             width: width,
             child: Column(
               children: posts.map<Widget>((post) {
-                return NormalCard.fromJSON(post);
+                return NormalCard(post);
               }).toList(),
             ),
           );
@@ -123,8 +119,8 @@ class _GeneralTabState extends State<GeneralTab> {
             child: Column(
               children: posts.map<Widget>((post) {
                 var card = x == 0
-                    ? BlackCard.fromJSON(post)
-                    : SmallCard.fromJSON(post);
+                    ? BlackCard(post)
+                    : SmallCard(post);
                 x++;
                 return card;
               }).toList(),
@@ -147,7 +143,7 @@ class _GeneralTabState extends State<GeneralTab> {
             child: Column(
               children: posts.map<Widget>((post) {
                 var card =
-                    x == 0 ? BigCard.fromJSON(post) : SmallCard.fromJSON(post);
+                    x == 0 ? BigCard(post) : SmallCard(post);
                 x++;
                 return card;
               }).toList(),

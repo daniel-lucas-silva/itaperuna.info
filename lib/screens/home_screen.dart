@@ -11,13 +11,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
+
   PageController _tabController;
   int _index;
 
   @override
   void initState() {
     super.initState();
-
     _tabController = new PageController();
     _index = 0;
   }
@@ -35,17 +35,19 @@ class _HomeScreenState extends State<HomeScreen>
       body: DefaultTabController(
         length: 2,
         child: NestedScrollView(
+
+
           headerSliverBuilder: (context, innexBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
                 expandedHeight: 130.0,
-                // floating: false,
                 pinned: true,
                 iconTheme: IconThemeData(color: Colors.white),
                 flexibleSpace: FlexibleSpaceBar(
                   background: Image.asset(
                     'bg-ita.jpg',
                     fit: BoxFit.cover,
+
                   ),
                   title: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -72,10 +74,12 @@ class _HomeScreenState extends State<HomeScreen>
           },
           body: PageView(
             controller: _tabController,
+            pageSnapping: true,
+
             onPageChanged: onTabChanged,
             children: <Widget>[
               GeneralTab(),
-              Container(),
+              ItaperunaTab(),
             ],
           ),
         ),

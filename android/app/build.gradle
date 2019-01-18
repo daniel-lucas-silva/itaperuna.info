@@ -21,8 +21,8 @@ if (flutterRoot == null) {
 //     flutterVersionName = '1.0'
 // }
 
-def flutterVersionCode = '3'
-def flutterVersionName = '2.5'
+def flutterVersionCode = '5'
+def flutterVersionName = '2.5.2'
 
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"

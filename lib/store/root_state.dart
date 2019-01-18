@@ -2,42 +2,40 @@ import 'package:meta/meta.dart';
 
 import './app/app_state.dart';
 import './recent/recent_state.dart';
-import './posts/post_state.dart';
+import './posts/posts_state.dart';
 
 @immutable
 class RootState {
   final AppState app;
   final RecentState recent;
-  final PostState post;
+  final PostsState posts;
 
-  RootState({AppState app, RecentState recent, PostState post})
+  RootState({AppState app, RecentState recent, PostsState posts})
       : app = app ?? AppState(),
         recent = recent ?? RecentState(),
-        post = post ?? PostState();
+        posts = posts ?? PostsState();
 
   dynamic toJson() => {
         'app': app.toJSON(),
         'recent': recent.toJSON(),
-        'post': post.toJSON(),
       };
 
   static RootState fromJSON(dynamic json) {
     return RootState(
       app: json != null ? AppState.fromJSON(json['app']) : AppState(),
       recent: json != null ? RecentState.fromJSON(json['recent']) : RecentState(),
-      post: json != null ? PostState.fromJSON(json['post']) : PostState(),
     );
   }
 
   RootState copyWith({
     AppState app,
     RecentState recent,
-    PostState post,
+    PostsState posts,
   }) {
     return RootState(
       app: app ?? this.app,
       recent: recent ?? this.recent,
-      post: post ?? this.post,
+      posts: posts ?? this.posts,
     );
   }
 
@@ -46,7 +44,6 @@ class RootState {
     return '''RootState{
             app: $app
             recent: $recent
-            post: $post
         }''';
   }
 }

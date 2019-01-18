@@ -5,32 +5,14 @@ import '../screens/single_post_screen.dart';
 
 class NormalCard extends StatelessWidget {
 
-  final String id;
-  final Map<dynamic, dynamic> author;
-  final List<dynamic> images;
-  final String title;
-  final String date;
+  final Map<String, dynamic> json;
 
-  NormalCard({
-    this.id,
-    this.author,
-    this.images,
-    this.title,
-    this.date,
-  });
+  NormalCard(
+      this.json
+      );
 
-  static NormalCard fromJSON(Map<String, dynamic> json) {
-    return NormalCard(
-      id: json['id'],
-      author: json['author'],
-      images: json['images'],
-      title: json['title'],
-      date: json['published'],
-    );
-  }
-
-  postScreen(id) {
-    return MaterialPageRoute(builder: (context) => SinglePostScreen(id));
+  postScreen() {
+    return MaterialPageRoute(builder: (context) => SinglePostScreen(json));
   }
 
   @override
@@ -39,7 +21,7 @@ class NormalCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () =>
-          Navigator.push(context, postScreen(id)),
+          Navigator.push(context, postScreen()),
       child: Card(
         margin: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
         child: Column(
@@ -50,7 +32,7 @@ class NormalCard extends StatelessWidget {
               decoration: BoxDecoration(
                 // color: Colors.red,
                   image: DecorationImage(
-                    image: images != null ? NetworkImage(images[0]['url']) : AssetImage('no-image.png'),
+                    image: json['images'] != null ? NetworkImage(json['images'][0]['url']) : AssetImage('no-image.png'),
                     fit: BoxFit.cover,
                   )),
             ),
@@ -59,7 +41,7 @@ class NormalCard extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Text(
-                    '''$title''',
+                    '''${json['title']}''',
                     style: TextStyle(
                       // color: Colors.white,
                       fontSize: 16.5,
@@ -73,7 +55,7 @@ class NormalCard extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         timeago.format(
-                          DateTime.parse(date),
+                          DateTime.parse(json['published']),
                           locale: 'pt_BR_short',),
                         style: TextStyle(
                           fontSize: 11.0,
@@ -83,7 +65,7 @@ class NormalCard extends StatelessWidget {
                         width: 3.0,
                       ),
                       Text(
-                        author['displayName'],
+                        json['author']['displayName'],
                         style: TextStyle(
                           color: Colors.green,
                           fontSize: 13.5,
@@ -103,39 +85,21 @@ class NormalCard extends StatelessWidget {
 
 class SmallCard extends StatelessWidget {
 
-  final String id;
-  final Map<dynamic, dynamic> author;
-  final List<dynamic> images;
-  final String title;
-  final String date;
+  final Map<String, dynamic> json;
 
-  SmallCard({
-    this.id,
-    this.author,
-    this.images,
-    this.title,
-    this.date,
-  });
+  SmallCard(
+      this.json
+      );
 
-  static SmallCard fromJSON(Map<String, dynamic> json) {
-    return SmallCard(
-      id: json['id'],
-      author: json['author'],
-      images: json['images'],
-      title: json['title'],
-      date: json['published'],
-    );
-  }
-
-  postScreen(id) {
-    return MaterialPageRoute(builder: (context) => SinglePostScreen(id));
+  postScreen() {
+    return MaterialPageRoute(builder: (context) => SinglePostScreen(json));
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () =>
-          Navigator.push(context, postScreen(id)),
+          Navigator.push(context, postScreen()),
       child: Container(
         height: 80.0,
         margin: EdgeInsets.only(bottom: 5.0),
@@ -148,7 +112,7 @@ class SmallCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   // color: Colors.red,
                     image: DecorationImage(
-                      image: images != null ? NetworkImage(images[0]['url']) : AssetImage('no-image.png'),
+                      image: json['images'] != null ? NetworkImage(json['images'][0]['url']) : AssetImage('no-image.png'),
                       fit: BoxFit.cover,
                     )),
               ),
@@ -158,7 +122,7 @@ class SmallCard extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        '''$title''',
+                        '''${json['title']}''',
                         maxLines: 2,
                         style: TextStyle(
                           // color: Colors.white,
@@ -172,7 +136,7 @@ class SmallCard extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             timeago.format(
-                                DateTime.parse(date),
+                                DateTime.parse(json['published']),
                                 locale: 'pt_BR_short'),
                             style: TextStyle(
                               fontSize: 11.0,
@@ -182,7 +146,7 @@ class SmallCard extends StatelessWidget {
                             width: 3.0,
                           ),
                           Text(
-                            author['displayName'],
+                            json['author']['displayName'],
                             style: TextStyle(
                               color: Colors.green,
                               fontSize: 11.5,
@@ -204,32 +168,14 @@ class SmallCard extends StatelessWidget {
 
 class BigCard extends StatelessWidget {
 
-  final String id;
-  final Map<dynamic, dynamic> author;
-  final List<dynamic> images;
-  final String title;
-  final String date;
+  final Map<String, dynamic> json;
 
-  BigCard({
-    this.id,
-    this.author,
-    this.images,
-    this.title,
-    this.date,
-  });
+  BigCard(
+      this.json
+      );
 
-  static BigCard fromJSON(Map<String, dynamic> json) {
-    return BigCard(
-      id: json['id'],
-      author: json['author'],
-      images: json['images'],
-      title: json['title'],
-      date: json['published'],
-    );
-  }
-
-  postScreen(id) {
-    return MaterialPageRoute(builder: (context) => SinglePostScreen(id));
+  postScreen() {
+    return MaterialPageRoute(builder: (context) => SinglePostScreen(json));
   }
 
   @override
@@ -237,14 +183,14 @@ class BigCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () =>
-          Navigator.push(context, postScreen(id)),
+          Navigator.push(context, postScreen()),
       child: Container(
         height: 250.0,
         margin: EdgeInsets.only(bottom: 5.0),
         decoration: BoxDecoration(
           // color: Colors.red,
           image: DecorationImage(
-            image: images != null ? NetworkImage(images[0]['url']) : AssetImage('no-image.png'),
+            image: json['images'] != null ? NetworkImage(json['images'][0]['url']) : AssetImage('no-image.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -291,7 +237,7 @@ class BigCard extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        '''$title''',
+                        '''${json['title']}''',
                         maxLines: 2,
                         style: TextStyle(
                           color: Colors.white,
@@ -305,7 +251,7 @@ class BigCard extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             timeago.format(
-                              DateTime.parse(date),
+                              DateTime.parse(json['published']),
                               locale: 'pt_BR_short',),
                             style: TextStyle(color: Colors.white70),
                           ),
@@ -313,7 +259,7 @@ class BigCard extends StatelessWidget {
                             width: 3.0,
                           ),
                           Text(
-                            author['displayName'],
+                            json['author']['displayName'],
                             style: TextStyle(color: Colors.greenAccent),
                           ),
                         ],
@@ -332,32 +278,14 @@ class BigCard extends StatelessWidget {
 
 class BlackCard extends StatelessWidget {
 
-  final String id;
-  final Map<dynamic, dynamic> author;
-  final List<dynamic> images;
-  final String title;
-  final String date;
+  final Map<String, dynamic> json;
 
-  BlackCard({
-    this.id,
-    this.author,
-    this.images,
-    this.title,
-    this.date,
-  });
+  BlackCard(
+    this.json
+  );
 
-  static BlackCard fromJSON(Map<String, dynamic> json) {
-    return BlackCard(
-      id: json['id'],
-      author: json['author'],
-      images: json['images'],
-      title: json['title'],
-      date: json['published'],
-    );
-  }
-
-  postScreen(id) {
-    return MaterialPageRoute(builder: (context) => SinglePostScreen(id));
+  postScreen() {
+    return MaterialPageRoute(builder: (context) => SinglePostScreen(json));
   }
 
   @override
@@ -366,7 +294,7 @@ class BlackCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () =>
-          Navigator.push(context, postScreen(id)),
+          Navigator.push(context, postScreen()),
       child: Container(
         height: 180.0,
         width: width,
@@ -381,7 +309,7 @@ class BlackCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   // color: Colors.red,
                     image: DecorationImage(
-                      image: images != null ? NetworkImage(images[0]['url']) : AssetImage('no-image.png'),
+                      image: json['images'] != null ? NetworkImage(json['images'][0]['url']) : AssetImage('no-image.png'),
                       fit: BoxFit.cover,
                     )),
               ),
@@ -391,7 +319,7 @@ class BlackCard extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        '''$title''',
+                        '''${json['title']}''',
                         maxLines: 5,
                         style: TextStyle(
                           color: Colors.white,
@@ -409,7 +337,7 @@ class BlackCard extends StatelessWidget {
                             children: <Widget>[
                               Text(
                                 timeago.format(
-                                  DateTime.parse(date),
+                                  DateTime.parse(json['published']),
                                   locale: 'pt_BR_short',),
                                 style: TextStyle(
                                   fontSize: 11.0,
@@ -420,7 +348,7 @@ class BlackCard extends StatelessWidget {
                                 width: 3.0,
                               ),
                               Text(
-                                author['displayName'],
+                                json['author']['displayName'],
                                 style: TextStyle(
                                   color: Colors.greenAccent,
                                   fontSize: 11.5,
