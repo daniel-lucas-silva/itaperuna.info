@@ -29,6 +29,10 @@ dependencies:
   redux_persist: ^0.8.0
   html2md: ^0.2.1
   flutter_markdown: ^0.2.0
+  # new version
+  sqflite: ^1.1.0
+  rxdart: ^0.20.0
+  dio: ^2.0.7
 
 dev_dependencies:
   flutter_test:

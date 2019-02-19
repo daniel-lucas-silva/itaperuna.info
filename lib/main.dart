@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         title: 'Itaperuna Notícias',
         home: HomeScreen(),
         theme: ThemeData(
-          primaryColor: Color(0xff286C3E),
+          primaryColor: Colors.green[800],
           accentColor: Colors.cyan[600],
           fontFamily: 'Montserrat',
           primaryTextTheme: TextTheme(

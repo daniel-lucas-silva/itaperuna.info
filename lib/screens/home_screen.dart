@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/main_drawer.dart';
@@ -11,7 +12,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-
   PageController _tabController;
   int _index;
 
@@ -31,72 +31,83 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MainDrawer(),
       body: DefaultTabController(
         length: 2,
         child: NestedScrollView(
-
-
-          headerSliverBuilder: (context, innexBoxIsScrolled) {
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                expandedHeight: 130.0,
-                pinned: true,
-                iconTheme: IconThemeData(color: Colors.white),
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Image.asset(
-                    'bg-ita.jpg',
-                    fit: BoxFit.cover,
-
-                  ),
-                  title: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        'Itaperuna',
-                        style: TextStyle(
-                            fontSize: 18.0, fontWeight: FontWeight.w400),
-                      ),
-                      Container(
-                        width: 1.0,
-                      ),
-                      Text(
-                        'Noticias',
-                        style: TextStyle(
-                            fontSize: 18.0, fontWeight: FontWeight.w200),
-                      )
-                    ],
-                  ),
-                  collapseMode: CollapseMode.parallax,
-                ),
-              ),
+                  pinned: true,
+                  centerTitle: true,
+                  expandedHeight: 130.0,
+                  forceElevated: innerBoxIsScrolled,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Image.asset(
+                      'bg-ita.jpg',
+                      fit: BoxFit.cover,
+                    ),
+                    title: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Text(
+                          'Itaperuna',
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.w400),
+                        ),
+                        Container(
+                          width: 1.0,
+                        ),
+                        Text(
+                          'Noticias',
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.w200),
+                        )
+                      ],
+                    ),
+                    collapseMode: CollapseMode.parallax,
+                  ))
             ];
           },
-          body: PageView(
-            controller: _tabController,
-            pageSnapping: true,
-
-            onPageChanged: onTabChanged,
+          body: Stack(
             children: <Widget>[
-              GeneralTab(),
-              ItaperunaTab(),
+              PageView(
+                controller: _tabController,
+                pageSnapping: true,
+                onPageChanged: onTabChanged,
+                children: [
+                  GeneralTab(),
+                  ItaperunaTab(),
+                ],
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: CupertinoTabBar(
+                  onTap: onTap, // new
+                  currentIndex: _index, // new
+                  backgroundColor: Colors.white54,
+                  inactiveColor: Colors.black54,
+                  activeColor: Colors.lightGreen[700],
+                  iconSize: 22.0,
+                  border: Border(
+                    top: BorderSide(
+                      color: Colors.black12
+                    )
+                  ),
+                  items: [
+                    BottomNavigationBarItem(
+                      title: Text('Geral'),
+                      icon: Icon(Icons.home),
+                    ),
+                    BottomNavigationBarItem(
+                      title: Text('Itaperuna'),
+                      icon: Icon(Icons.info_outline),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _index,
-        onTap: onTap,
-        items: [
-          BottomNavigationBarItem(
-            title: Text('Geral'),
-            icon: Icon(Icons.home),
-          ),
-          BottomNavigationBarItem(
-            title: Text('Itaperuna'),
-            icon: Icon(Icons.info_outline),
-          ),
-        ],
       ),
     );
   }
