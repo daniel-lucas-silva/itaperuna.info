@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 
-class Cards  {
-  static simple({ category, title, author, date, onPress }) {
+class Cards {
+  static simple({image, category, title, author, date, onPress}) {
     return Card(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
       child: Container(
-        height: 100.0,
+        height: 105.0,
         child: Row(
           children: <Widget>[
             Container(
-              width: 85.0,
-              height: 100.0,
-              color: Colors.black,
+              width: 90.0,
+              height: 105.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(image),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             Expanded(
               child: Padding(
@@ -20,7 +27,7 @@ class Cards  {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      "CATEGORY",
+                      "$category",
                       style: TextStyle(
                         fontSize: 12.0,
                         fontWeight: FontWeight.w600,
@@ -28,10 +35,10 @@ class Cards  {
                       ),
                     ),
                     Text(
-                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
+                      "$title",
                       maxLines: 3,
                       style: TextStyle(
-                        fontSize: 12.0,
+                        fontSize: 13.0,
                         color: Colors.black54,
                       ),
                     ),
