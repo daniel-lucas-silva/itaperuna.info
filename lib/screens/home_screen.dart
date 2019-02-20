@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/main_drawer.dart';
-import './home_tabs/general_tab.dart';
-import './home_tabs/itaperuna_tab.dart';
+import 'package:itaperuna/components/home_app_bar.dart';
+import 'package:itaperuna/components/home_drawer.dart';
+import 'package:itaperuna/screens/home_tabs/first_tab.dart';
+import 'package:itaperuna/screens/home_tabs/second_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
-  createState() => _HomeScreenState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+
   PageController _tabController;
   int _index;
 
@@ -28,44 +28,29 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
+  void onTap(int tab) {
+    _tabController.jumpToPage(tab);
+  }
+
+  void onTabChanged(int tab) {
+    setState(() {
+      this._index = tab;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: HomeDrawer(),
       body: DefaultTabController(
         length: 2,
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
-              SliverAppBar(
-                  pinned: true,
-                  centerTitle: true,
-                  expandedHeight: 130.0,
-                  forceElevated: innerBoxIsScrolled,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Image.asset(
-                      'bg-ita.jpg',
-                      fit: BoxFit.cover,
-                    ),
-                    title: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        Text(
-                          'Itaperuna',
-                          style: TextStyle(
-                              fontSize: 18.0, fontWeight: FontWeight.w400),
-                        ),
-                        Container(
-                          width: 1.0,
-                        ),
-                        Text(
-                          'Noticias',
-                          style: TextStyle(
-                              fontSize: 18.0, fontWeight: FontWeight.w200),
-                        )
-                      ],
-                    ),
-                    collapseMode: CollapseMode.parallax,
-                  ))
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: HomeAppBar(),
+              )
             ];
           },
           body: Stack(
@@ -75,32 +60,27 @@ class _HomeScreenState extends State<HomeScreen>
                 pageSnapping: true,
                 onPageChanged: onTabChanged,
                 children: [
-                  GeneralTab(),
-                  ItaperunaTab(),
+                  FirstTab(),
+                  SecondTab(),
                 ],
               ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: CupertinoTabBar(
-                  onTap: onTap, // new
-                  currentIndex: _index, // new
+                  onTap: onTap,
+                  currentIndex: _index,
                   backgroundColor: Colors.white54,
                   inactiveColor: Colors.black54,
-                  activeColor: Colors.lightGreen[700],
-                  iconSize: 22.0,
-                  border: Border(
-                    top: BorderSide(
-                      color: Colors.black12
-                    )
-                  ),
+                  activeColor: Colors.lightGreen[800],
+                  iconSize: 24.0,
                   items: [
                     BottomNavigationBarItem(
-                      title: Text('Geral'),
                       icon: Icon(Icons.home),
+                      title: Text('Início'),
                     ),
                     BottomNavigationBarItem(
+                      icon: Icon(Icons.info),
                       title: Text('Itaperuna'),
-                      icon: Icon(Icons.info_outline),
                     ),
                   ],
                 ),
@@ -111,14 +91,5 @@ class _HomeScreenState extends State<HomeScreen>
       ),
     );
   }
-
-  void onTap(int tab) {
-    _tabController.jumpToPage(tab);
-  }
-
-  void onTabChanged(int tab) {
-    setState(() {
-      this._index = tab;
-    });
-  }
 }
+
